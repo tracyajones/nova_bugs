@@ -1,0 +1,308 @@
+@charset "UTF-8";
+/* ubuntu-webfonts.css */
+@font-face {
+    font-family: "Ubuntu";
+    font-style: italic;
+    font-weight: normal;
+    src: local("Ubuntu Italic"), local("Ubuntu-Italic"), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v3/kbP_6ONYVgE-bLa9ZRbvvvesZW2xOQ-xsNqO47m55DA.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: bold;
+    src: local("Ubuntu Bold"), local("Ubuntu-Bold"), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v3/0ihfXUL2emPh0ROJezvraD8E0i7KZn-EPnyo3HZu7kw.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    font-style: italic;
+    font-weight: bold;
+    src: local("Ubuntu Bold Italic"), local("Ubuntu-BoldItalic"), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v3/OMD20Sg9RTs7sUORCEN-7YbN6UDyHWBl620a-IRfuBk.woff) format("woff")
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Ubuntu"), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v3/_xyN3apAT_yRRDeqB3sPRg.woff) format("woff")
+}
+
+
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset,
+legend, input, textarea, p, blockquote, th, td {
+    margin: 20px;
+    padding: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+
+
+ 
+    .bug {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -3536px
+    }
+
+    .bug-critical {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -3650px
+    }
+
+    .bug-high {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -3764px
+    }
+
+    .bug-medium {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -3878px
+    }
+
+    .bug-low {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -3992px
+    }
+
+    .bug-wishlist {
+        background-image: url(inline-sprites-1.png);
+        background-repeat: no-repeat;
+        background-position: 0 -4106px
+    }
+
+
+    /* css/base.css */
+    body {
+        font-family: Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        color: #333
+    }
+
+    th {
+        text-align: right
+    }
+
+    th, td {
+        vertical-align: baseline
+    }
+
+    table.cozy-listing {
+        width: 80em;
+        background-color: #fff;
+        border: 1px solid #d2d2d2;
+        border-bottom: 1px solid #d2d2d2
+		margin: 0px;
+		padding: 0px;
+    }
+
+	table.cozy-listing th {
+		text-align: left;
+		font-weight: bold
+		padding-right: 10px;
+	}
+	
+    table.cozy-listing td {
+        border: 1px #d2d2d2;
+        border-style: dotted none none none
+		/*padding-right: 10px;*/
+    }
+
+    table.listing {
+        margin: 0;
+        width: 100%
+    }
+
+    table.listing, table.listing tbody, table.listing td.end-of-section {
+        border-bottom: 1px solid #d2d2d2
+    }
+
+    table.listing th {
+        font-weight: bold;
+		text-align: left;
+    }
+
+    table.listing .head, table.listing .head th, table.listing thead, table.listing thead th, table.listing tfoot tr, table.listing tr.thead th {
+        border: 1px solid #d2d2d2;
+        background-color: #fff
+    }
+
+    table.listing tr.category {
+        border-bottom: 1px solid #d2d2d2
+    }
+
+    table.listing tr.category th, table.listing tr.category td {
+        padding-top: 1em
+    }
+
+    table.listing thead td, table.listing table tbody, table.listing table thead, table.listing table thead th, table.listing tfoot tr, table.listing table tfoot td, table.listing table td {
+        border: none
+    }
+
+    table.listing tfoot td {
+        border: 1px solid #d2d2d2
+    }
+
+    table.listing th, table.listing td {
+        padding: .25em
+    }
+
+    table.listing table th, table.listing table td {
+        padding: 0
+    }
+
+    table.listing thead th, table.listing tr.thead th {
+        white-space: nowrap
+    }
+
+    table.listing td {
+        border: 1px #d2d2d2;
+        border-style: dotted none none none
+    }
+
+    table.listing .section-break td {
+        border-width: 1px 0 0 0;
+        border-style: solid;
+        border-color: #d2d2d2;
+        height: 1em
+    }
+
+    table.listing .note td {
+        border-style: none
+    }
+
+    table.listing img {
+        vertical-align: middle
+    }
+
+    table.listing tr.secondary th, table.listing tr.secondary td {
+        border-top: none
+    }
+
+    table.listing table.simple {
+        margin-left: 2em
+    }
+
+    table.listing table.simple td {
+        padding: .25em
+    }
+
+    table.listing .section-heading {
+        border: none;
+        padding-top: 1.5em
+    }
+
+    /* css/typography.css */
+    h1, h2, h3, h4, h5, h6 {
+        background: none;
+        clear: left
+    }
+
+    h1 {
+        clear: none;
+        font-size: 30px;
+        line-height: 34px
+    }
+
+    h2 {
+        margin-top: 16px;
+        margin-bottom: 8px;
+        font-size: 22px;
+        line-height: 26px
+    }
+
+    h3 {
+        margin-top: 16px;
+        margin-bottom: 8px;
+        font-size: 16px;
+        line-height: 20px
+    }
+
+
+    .statusNEW, .statusNEW a {
+        /* color: #930 */
+		 border-width: 0 0 1px 0;
+		color: #c63600;
+        background-color: #ffdabe
+    }
+
+    .statusINCOMPLETE, .statusINCOMPLETE a, .statusCONFIRMED, .statusCONFIRMED a {
+        border-width: 0 0 1px 0;
+		color: #896e00;
+        background-color: #f4f1a4
+    }
+
+    .statusTRIAGED, .statusTRIAGED a {
+		 border-width: 0 0 1px 0;
+        color: #896e00;
+        background-color: #f4f1a4
+    }
+
+    .statusINPROGRESS, .statusINPROGRESS a {
+		 border-width: 0 0 1px 0;
+        /* color: black */
+		color: #137587;
+        background-color: #cbe7ef
+    }
+
+    .statusFIXCOMMITTED, .statusFIXCOMMITTED a {
+		 border-width: 0 0 1px 0;
+        color: #050
+    }
+
+    .statusFIXRELEASED, .statusFIXRELEASED a {
+		 border-width: 0 0 1px 0;
+        color: green
+    }
+
+    .statusINVALID, .statusINVALID a, .statusWONTFIX, .statusWONTFIX a {
+        color: #555
+		 border-width: 0 0 1px 0;
+    }
+
+    .importanceCRITICAL, .importanceCRITICAL a {
+		 border-width: 0 0 1px 0;
+        background-color: #DF382C;
+        color: white
+    }
+
+    .importanceHIGH, .importanceHIGH a {
+		 border-width: 0 0 1px 0;
+        background-color: #EFB73E;
+        color: white
+    }
+
+    .importanceMEDIUM, .importanceMEDIUM a {
+		 border-width: 0 0 1px 0;
+         background-color: #19B6EE;
+        color: white
+    }
+
+    .importanceLOW, .importanceLOW a {
+		 border-width: 0 0 1px 0;
+        background-color: #38B44A;
+        color: white
+    }
+
+    .importanceWISHLIST, .importanceWISHLIST a {
+		 border-width: 0 0 1px 0;
+        background-color: #724dc8;
+        color: white
+    }
+
+    .importanceUNDECIDED, .importanceUNDECIDED a {
+		 border-width: 0 0 1px 0;
+        background-color: #999;
+        color: white
+    }
+
