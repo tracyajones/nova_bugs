@@ -31,7 +31,7 @@ LPCACHEDIR = os.path.expanduser(os.environ.get('LPCACHEDIR',
 LPPROJECT = os.environ.get('LPPROJECT',
                            'nova')
 LPSTATUS = ('New', 'Confirmed', 'Triaged', 'In Progress')
-LPIMPORTANCE = ('Critical', 'High', 'Medium', 'Undecided')
+LPIMPORTANCE = ('Critical', 'High', 'Medium', 'Undecided', 'Low', 'Wishlist')
 
 RE_LINK = re.compile(' https://review.openstack.org/(\d+)')
 
