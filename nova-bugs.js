@@ -8,7 +8,7 @@ app.controller("BugCtrl", function($scope) {
 	$scope.filterSelection = "all";
 	$scope.data = angular.fromJson(FileHelper.readStringFromFileAtPath ( "bugs.json" ));
     $scope.raw_data = $scope.data.bugs;
-	$scope.date = $scope.raw_data.date;
+	$scope.date = $scope.data.date;
 
 	console.log($scope.date);
 	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
