@@ -45,19 +45,31 @@ In Progress, but all Merged
 </form>
 <br>
 <div class="bugs-table-listing">
-  <table class="listing">
+  <table class="table table-bordered listing">
     <tr>
-      <th>ID</th>
-      <th>Priority</th>
+      <th>
+          <a href="#" ng-click="orderByField='id'; reverseSort = !reverseSort">
+          ID <span ng-show="orderByField == 'id'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
+      <th>
+          <a href="#" ng-click="orderByField='importance'; reverseSort = !reverseSort">
+          Priority <span ng-show="orderByField == 'importance'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
       <th></th>
-      <th>Status</th>
+      <th>
+          <a href="#" ng-click="orderByField='status'; reverseSort = !reverseSort">
+          Status <span ng-show="orderByField == 'status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
       <th>Age</th>
       <th>Updated</th>
       <th>Review Status</th>
        <th>Owner</th>
       <th>Description</th>
     </tr>
-    <tr class="buglisting-row" ng-repeat="item in filtered_data | filter:query | orderBy: orderList">
+    <tr class="buglisting-row" ng-repeat="item in filtered_data | filter:query | orderBy:orderByField:reverseSort">
       <td class="bugnumber"> {{item.id}} </td>
       <td class="importance {{item.prio_class}}"> {{item.importance}} </td >
       <td></td>
