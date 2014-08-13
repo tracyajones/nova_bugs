@@ -9,6 +9,7 @@ app.controller("BugCtrl", function($scope) {
 	$scope.data = angular.fromJson(FileHelper.readStringFromFileAtPath ( "bugs.json" ));
     $scope.raw_data = $scope.data.bugs;
 	$scope.date = $scope.data.date;
+    $scope.reverseSort = false;
 
 	console.log($scope.date);
 	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
