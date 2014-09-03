@@ -3,33 +3,33 @@
 var app = angular.module("NovaBugs", []);
 
 app.controller("BugCtrl", function($scope) {
-	$scope.priority = "Critical";
-	$scope.orderList = "importance";
-	$scope.filterSelection = "all";
-	$scope.data = angular.fromJson(FileHelper.readStringFromFileAtPath ( "bugs.json" ));
+    $scope.priority = "Critical";
+    $scope.orderList = "importance";
+    $scope.filterSelection = "all";
+    $scope.data = angular.fromJson(FileHelper.readStringFromFileAtPath ( "bugs.json" ));
     $scope.raw_data = $scope.data.bugs;
-	$scope.date = $scope.data.date;
+    $scope.date = $scope.data.date;
     $scope.reverseSort = false;
 
-	console.log($scope.date);
-	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
-        var owner = $scope.raw_data[i].owner
+    console.log($scope.date);
+    for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
+        var owner = $scope.raw_data[i].owner;
         if (owner != "Unknown")
             $scope.raw_data[i].parsed_owner = owner.substring(31);
         else
             $scope.raw_data[i].parsed_owner = owner;
         try {
-			$scope.raw_data[i].status_prio = "status" + $scope.raw_data[i].status.toUpperCase().replace(" ", "");
-		}
-		catch (exception) {
-			$scope.raw_data[i].status_prio = "unknown"
-		}
-		try {
-			$scope.raw_data[i].prio_class = "importance" + $scope.raw_data[i].importance.toUpperCase();
-		}
-		catch (exception) {
-			$scope.raw_data[i].importance_prio = "unknown"
-		}
+	    $scope.raw_data[i].status_prio = "status" + $scope.raw_data[i].status.toUpperCase().replace(" ", "");
+	}
+	catch (exception) {
+	    $scope.raw_data[i].status_prio = "unknown";
+	}
+	try {
+	    $scope.raw_data[i].prio_class = "importance" + $scope.raw_data[i].importance.toUpperCase();
+	}
+	catch (exception) {
+	    $scope.raw_data[i].importance_prio = "unknown";
+	}
         $scope.raw_data[i].merged = 0;
         $scope.raw_data[i].abandoned = 0;
         $scope.raw_data[i].in_review = 0;
@@ -42,30 +42,30 @@ app.controller("BugCtrl", function($scope) {
             else if ($scope.raw_data[i].reviews[j].status == "NEW")
                 $scope.raw_data[i].in_review++;
         }
-	}
-	$scope.filtered_data = $scope.raw_data;
-	
+    }
+    $scope.filtered_data = $scope.raw_data;
 
-	 $scope.FilterCtrl = function(value) {
-		//$scope.filterSelection = value;
-		$scope.filtered_data = [];
-		console.log($scope.filterSelection);
-		if ($scope.filterSelection == "all"){
-			$scope.filtered_data = $scope.raw_data;
-		}
-		else {
-			if ($scope.filterSelection == "stale") {
-				filterStale();
-			}
-			else if ($scope.filterSelection == "update") {
-				filterUpdated();
-			}
-			else if ($scope.filterSelection == "inProgress") {
-				filterInProgress();
-			}
-			else if ($scope.filterSelection == "noOwner") {
-				filterNoOwner();
-			}
+
+    $scope.FilterCtrl = function(value) {
+	//$scope.filterSelection = value;
+	$scope.filtered_data = [];
+	console.log($scope.filterSelection);
+	if ($scope.filterSelection == "all"){
+	    $scope.filtered_data = $scope.raw_data;
+	}
+	else {
+	    if ($scope.filterSelection == "stale") {
+		filterStale();
+	    }
+	    else if ($scope.filterSelection == "update") {
+		filterUpdated();
+	    }
+	    else if ($scope.filterSelection == "inProgress") {
+		filterInProgress();
+	    }
+	    else if ($scope.filterSelection == "noOwner") {
+		filterNoOwner();
+	    }
             else if ($scope.filterSelection == "abandoned") {
                 filterAbandoned();
             }
@@ -79,8 +79,8 @@ app.controller("BugCtrl", function($scope) {
                 filterUndecided();
             }
 
-		}	
-    }
+	}
+    };
 
     function filterUndecided() {
         for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
@@ -122,42 +122,42 @@ app.controller("BugCtrl", function($scope) {
     }
 
 
-	function filterStale() {
-		for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
-			  var item = $scope.raw_data[i];
-			  if (item.stale == 1) {
-				  $scope.filtered_data.push(item);
-			  }
-		}
+    function filterStale() {
+	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
+	    var item = $scope.raw_data[i];
+	    if (item.stale == 1) {
+		$scope.filtered_data.push(item);
+	    }
 	}
-	
-	function filterUpdated() {
-		for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
-			var item = $scope.raw_data[i];
-			if (item.never_touched == 1) {
-				$scope.filtered_data.push(item);
-			}
-		}
+    }
+
+    function filterUpdated() {
+	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
+	    var item = $scope.raw_data[i];
+	    if (item.never_touched == 1) {
+		$scope.filtered_data.push(item);
+	    }
 	}
-	
-	function filterInProgress() {
-		  for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
-			  var item = $scope.raw_data[i];
-			if (item.status == "In Progress") {
-				$scope.filtered_data.push(item);
-			}
-		  }
+    }
+
+    function filterInProgress() {
+	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
+	    var item = $scope.raw_data[i];
+	    if (item.status == "In Progress") {
+		$scope.filtered_data.push(item);
+	    }
 	}
-	
-	function filterNoOwner() {
-		  for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
-			  var item = $scope.raw_data[i];
-			if (item.owner == "None") {
-				$scope.filtered_data.push(item);
-			}
-		  }
+    }
+
+    function filterNoOwner() {
+	for( var i=0, l=$scope.raw_data.length; i<l; i++ ) {
+	    var item = $scope.raw_data[i];
+	    if (item.owner == "None") {
+		$scope.filtered_data.push(item);
+	    }
 	}
-	
+    }
+
 });
 
 function FileHelper()
@@ -171,6 +171,5 @@ function FileHelper()
         var returnValue = request.responseText;
 
         return returnValue;
-    }
+    };
 }
-
