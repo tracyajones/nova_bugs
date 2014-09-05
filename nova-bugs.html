@@ -63,11 +63,27 @@ In Progress, but all Merged
           Status <span ng-show="orderByField == 'status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
           </a>
       </th>
-      <th>Age</th>
-      <th>Updated</th>
+      <th>
+          <a href="#" ng-click="orderByField='age'; reverseSort = !reverseSort">
+          Age <span ng-show="orderByField == 'age'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
+      <th>
+          <a href="#" ng-click="orderByField='update'; reverseSort = !reverseSort">
+          Updated <span ng-show="orderByField == 'update'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
       <th>Review Status</th>
-       <th>Owner</th>
-      <th>Description</th>
+      <th>
+          <a href="#" ng-click="orderByField='owner'; reverseSort = !reverseSort">
+          Owner <span ng-show="orderByField == 'owner'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
+      <th>
+          <a href="#" ng-click="orderByField='title'; reverseSort = !reverseSort">
+          Description <span ng-show="orderByField == 'title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+          </a>
+      </th>
     </tr>
     <tr class="buglisting-row" ng-repeat="item in filtered_data | filter:query | orderBy:orderByField:reverseSort">
       <td class="bugnumber"> {{item.id}} </td>
