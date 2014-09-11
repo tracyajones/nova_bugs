@@ -1,104 +1,148 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Nova Bugs</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" type="text/javascript"></script>
-<script src="nova-bugs.js" type="text/javascript"></script>
-<link href="style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Nova Bugs</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"
+            type="text/javascript"></script>
+    <script src="nova-bugs.js" type="text/javascript"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-app="NovaBugs" ng-controller="BugCtrl" >
+<body ng-app="NovaBugs" ng-controller="BugCtrl">
 <h1>Nova Bug Triage</h1>
+
 <p>Updated: {{date}} </p>
+
 <p>Count: {{filtered_data.length}}</p>
 
 Search: <input type="text" id="query" ng-model="query"/>
 <select ng-model="orderList">
-  <option value="importance">Importance</option>
-  <option value="age">Newest</option>
-  <option value="-age">Oldest</option>
-  <option value="update">Recently Updated</option>
-  <option value="-update">Not Recently Updated</option>
+    <option value="importance">Importance</option>
+    <option value="age">Newest</option>
+    <option value="-age">Oldest</option>
+    <option value="update">Recently Updated</option>
+    <option value="-update">Not Recently Updated</option>
 </select>
+
 <form name="myForm" novalidate>
-<input type="radio" name="all-radio" ng-change='FilterCtrl()' ng-model="filterSelection" value="all" checked="checked">
-All
-<input type="radio" name="value-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="stale">
-Not updated in the last month
-<input type="radio"  name="update-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="update">
-Never updated
-<input type="radio" name="progress-radio"  ng-change="FilterCtrl()" ng-model="filterSelection"value="inProgress">
-In Progress
-<input type="radio" name="undecided-radio"  ng-change="FilterCtrl()" ng-model="filterSelection"value="undecided">
+    <input type="radio" name="all-radio" ng-change='FilterCtrl()'
+           ng-model="filterSelection" value="all" checked="checked">
+    All
+    <input type="radio" name="value-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="stale">
+    Not updated in the last month
+    <input type="radio" name="update-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="update">
+    Never updated
+    <input type="radio" name="progress-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="inProgress">
+    In Progress
+    <input type="radio" name="undecided-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="undecided">
     Undecided
-<input type="radio"  name="owner-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="noOwner">
-No Owner
-<br>
-<input type="radio"  name="abandoned-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="abandoned">
-In Progress, but all Abandoned
-    <input type="radio"  name="merged-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="merged">
-In Progress, but all Merged
-    <input type="radio"  name="review-radio"  ng-change="FilterCtrl()" ng-model="filterSelection" value="review">
+    <input type="radio" name="owner-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="noOwner">
+    No Owner
+    <br>
+    <input type="radio" name="owner-abandoned-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="ownerAbandoned">
+    Owner has no update in 30 days
+    <br>
+    <input type="radio" name="abandoned-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="abandoned">
+    In Progress, but all Abandoned
+    <input type="radio" name="merged-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="merged">
+    In Progress, but all Merged
+    <input type="radio" name="review-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="review">
     Ready For Review
     <br>
 
 </form>
 <br>
+
 <div class="bugs-table-listing">
-  <table class="table table-bordered listing">
-    <tr>
-      <th>
-          <a href="#" ng-click="orderByField='id'; reverseSort = !reverseSort">
-          ID <span ng-show="orderByField == 'id'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th>
-          <a href="#" ng-click="orderByField='importance'; reverseSort = !reverseSort">
-          Priority <span ng-show="orderByField == 'importance'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th></th>
-      <th>
-          <a href="#" ng-click="orderByField='status'; reverseSort = !reverseSort">
-          Status <span ng-show="orderByField == 'status'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th>
-          <a href="#" ng-click="orderByField='age'; reverseSort = !reverseSort">
-          Age <span ng-show="orderByField == 'age'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th>
-          <a href="#" ng-click="orderByField='update'; reverseSort = !reverseSort">
-          Updated <span ng-show="orderByField == 'update'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th>Review Status</th>
-      <th>
-          <a href="#" ng-click="orderByField='owner'; reverseSort = !reverseSort">
-          Owner <span ng-show="orderByField == 'owner'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-      <th>
-          <a href="#" ng-click="orderByField='title'; reverseSort = !reverseSort">
-          Description <span ng-show="orderByField == 'title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-          </a>
-      </th>
-    </tr>
-    <tr class="buglisting-row" ng-repeat="item in filtered_data | filter:query | orderBy:orderByField:reverseSort">
-      <td class="bugnumber"> {{item.id}} </td>
-      <td class="importance {{item.prio_class}}"> {{item.importance}} </td >
-      <td></td>
-      <td nowrap class="status {{item.status_prio}}">{{item.status}} </td >
-      <td > {{item.age}} </td >
-      <td > {{item.update}} </td >
-        <td nowrap> M: {{item.merged}} A: {{item.abandoned}} N: {{item.in_review}} </td >
-        <td>{{item.parsed_owner}}</td>
-      <td><a href="{{item.link}}"> {{item.title | limitTo:72}}</a></td>
-    </tr>
-    <tr>&nbsp;<td colspan=7/>
-    </tr>
-  </table>
+    <table class="table table-bordered listing">
+        <tr>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='id'; reverseSort = !reverseSort">
+                    ID <span ng-show="orderByField == 'id'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='importance'; reverseSort = !reverseSort">
+                    Priority <span ng-show="orderByField == 'importance'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th></th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='status'; reverseSort = !reverseSort">
+                    Status <span ng-show="orderByField == 'status'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='age'; reverseSort = !reverseSort">
+                    Age <span ng-show="orderByField == 'age'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='update'; reverseSort = !reverseSort">
+                    Updated <span ng-show="orderByField == 'update'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th>Review Status</th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='owner'; reverseSort = !reverseSort">
+                    Owner <span ng-show="orderByField == 'owner'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+            <th>
+                <a href="#"
+                   ng-click="orderByField='title'; reverseSort = !reverseSort">
+                    Description <span ng-show="orderByField == 'title'"><span
+                        ng-show="!reverseSort">^</span><span
+                        ng-show="reverseSort">v</span></span>
+                </a>
+            </th>
+        </tr>
+        <tr class="buglisting-row"
+            ng-repeat="item in filtered_data | filter:query | orderBy:orderByField:reverseSort">
+            <td class="bugnumber"> {{item.id}}</td>
+            <td class="importance {{item.prio_class}}"> {{item.importance}}
+            </td>
+            <td></td>
+            <td nowrap class="status {{item.status_prio}}">{{item.status}}</td>
+            <td> {{item.age}}</td>
+            <td> {{item.update}}</td>
+            <td nowrap> M: {{item.merged}} A: {{item.abandoned}} N:
+                {{item.in_review}}
+            </td>
+            <td>{{item.parsed_owner}}</td>
+            <td><a href="{{item.link}}"> {{item.title | limitTo:72}}</a></td>
+        </tr>
+        <tr>&nbsp;
+            <td colspan=7/>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
