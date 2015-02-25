@@ -16,12 +16,11 @@
 # launchpad and writes them to a file in JSON format.  This is based on
 # infra_bugday.py from the CI team
 
-import argparse
 import datetime
 import json
+from optparse import OptionParser
 import os
 import re
-import sys
 
 from launchpadlib.launchpad import Launchpad
 import requests
@@ -66,27 +65,39 @@ def delta(date_value):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='pull all bugs from a '
-                                                 'launchpad project')
 
-    args = parser.parse_args()
+
+    parser = OptionParser()
+    parser.add_option("-p", "--project", dest="project", default="nova",
+                      help="generate a report for a project")
+    parser.add_option("-o", "--output", dest="output_file",
+                      help="Output file")
+    parser.add_option("-l", "--limit", dest="limit", default=None,
+                      help="Limit - default is none")
+
+
+    (options, args) = parser.parse_args()
+    if options.output_file is None:
+        exit('Output File is required')
 
     launchpad = Launchpad.login_anonymously('OpenStack Infra Bugday',
                                             'production',
                                             LPCACHEDIR)
-    project = launchpad.projects[LPPROJECT]
+    project = launchpad.projects[options.project]
     counter = 0
 
     nova_status = "Unknown"
 
-    f = open('bugs-refresh.json', 'w')
+    outfile = options.output_file + '/bugs-refresh.json'
+    f = open(outfile, 'w')
     f.write('{"date": "%s", "bugs": [' % datetime.datetime.now())
 
     for task in project.searchTasks(status=LPSTATUS, importance=LPIMPORTANCE,
                                     omit_duplicates=True,
                                     order_by='-importance'):
-        #if counter == 300:
-        #    break
+
+        if options.limit and counter == int(options.limit):
+            break
         bug = launchpad.load(task.bug_link)
 
         nova_status = 'Unknown'
