@@ -14,14 +14,16 @@
 
 <p>Updated: {{date}} &nbsp;&nbsp;&nbsp; Count: {{filtered_data.length}}</p>
 
-Search: <input type="text" id="query" ng-model="query"/>
-<select ng-model="orderList">
-    <option value="importance">Importance</option>
-    <option value="age">Newest</option>
-    <option value="-age">Oldest</option>
-    <option value="update">Recently Updated</option>
-    <option value="-update">Not Recently Updated</option>
-</select>
+<div style="float:right;z-index: 10;position: absolute;position: absolute;right: 0;top: 0;">
+    <p>Search: <input type="text" id="query" ng-model="query"/></p>
+    <p><select ng-model="orderList">
+        <option value="importance">Importance</option>
+        <option value="age">Newest</option>
+        <option value="-age">Oldest</option>
+        <option value="update">Recently Updated</option>
+        <option value="-update">Not Recently Updated</option>
+    </select></p>
+</div>
 
 <form name="myForm" novalidate>
     <input type="radio" name="all-radio" ng-change='FilterCtrl()'
@@ -42,17 +44,15 @@ Search: <input type="text" id="query" ng-model="query"/>
     <input type="radio" name="owner-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="noOwner">
     No Owner
-    <br>
+    <input type="radio" name="review-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="review">
+    Ready For Review
     <input type="radio" name="abandoned-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="abandoned">
     In Progress, but all Abandoned
     <input type="radio" name="merged-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="merged">
     In Progress, but all Merged
-    <input type="radio" name="review-radio" ng-change="FilterCtrl()"
-           ng-model="filterSelection" value="review">
-    Ready For Review
-    <br>
     <input type="radio" name="owner-abandoned-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="ownerAbandoned">
     Owner has no update in 30 days
