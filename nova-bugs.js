@@ -80,9 +80,21 @@ app.controller("BugCtrl", function ($scope) {
             else if ($scope.filterSelection == "undecided") {
                 filterUndecided();
             }
+            else if ($scope.filterSelection == "new") {
+                filterNew();
+            }
 
         }
     };
+
+    function filterNew() {
+        for (var i = 0, l = $scope.raw_data.length; i < l; i++) {
+            var item = $scope.raw_data[i];
+            if (item.status == "New") {
+                $scope.filtered_data.push(item);
+            }
+        }
+    }
 
     function filterUndecided() {
         for (var i = 0, l = $scope.raw_data.length; i < l; i++) {
