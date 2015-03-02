@@ -115,7 +115,7 @@ def main():
                              task.importance,
                              nova_status,
                              nova_owner,
-                             title,
+                             title.encode('ascii', 'ignore'),
                              task.web_link))
 
         except (TypeError, UnicodeEncodeError):
