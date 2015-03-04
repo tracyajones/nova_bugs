@@ -83,7 +83,9 @@ app.controller("BugCtrl", function ($scope) {
             else if ($scope.filterSelection == "new") {
                 filterNew();
             }
-
+            else if ($scope.filterSelection == "noactivity") {
+                filterNoActivity();
+            }
         }
     };
 
@@ -122,6 +124,16 @@ app.controller("BugCtrl", function ($scope) {
         for (var i = 0, l = data.length; i < l; i++) {
             if (data[i].merged == 0 && data[i].abandoned > 0 && data[i].in_review == 0)
                 $scope.filtered_data.push(data[i]);
+        }
+    }
+
+    function filterNoActivity() {
+        $scope.filtered_data = [];
+        for (var i = 0, l = $scope.raw_data.length; i < l; i++) {
+            var item = $scope.raw_data[i];
+            if (item.status == "In Progress" && item.in_review == 0) {
+                $scope.filtered_data.push(item);
+            }
         }
     }
 

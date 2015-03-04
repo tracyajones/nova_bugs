@@ -36,9 +36,6 @@
     <input type="radio" name="update-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="update">
     Never updated
-    <input type="radio" name="progress-radio" ng-change="FilterCtrl()"
-           ng-model="filterSelection" value="inProgress">
-    In Progress
     <input type="radio" name="undecided-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="undecided">
     Undecided
@@ -48,18 +45,25 @@
     <input type="radio" name="review-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="review">
     Ready For Review
-    <input type="radio" name="abandoned-radio" ng-change="FilterCtrl()"
-           ng-model="filterSelection" value="abandoned">
-    In Progress, but all Abandoned
-    <input type="radio" name="merged-radio" ng-change="FilterCtrl()"
-           ng-model="filterSelection" value="merged">
-    In Progress, but all Merged
     <input type="radio" name="owner-abandoned-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="ownerAbandoned">
     Owner has no update in 30 days
     <input type="radio" name="value-radio" ng-change="FilterCtrl()"
            ng-model="filterSelection" value="stale">
     Not updated in the last month
+    <br>
+    <input type="radio" name="progress-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="inProgress">
+    In Progress
+    <input type="radio" name="abandoned-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="abandoned">
+    In Progress, but all Abandoned
+    <input type="radio" name="merged-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="merged">
+    In Progress, but all Merged
+    <input type="radio" name="merged-radio" ng-change="FilterCtrl()"
+           ng-model="filterSelection" value="noactivity">
+    In Progress, but zero reviews
 </form>
 
 <div class="bugs-table-listing">
